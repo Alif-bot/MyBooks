@@ -49,6 +49,21 @@ struct EditBookView: View {
                 }
             }
             .foregroundStyle(.secondary)
+            .onChange(of: status) { oldValue, newValue in
+                if newValue == .onShelf {
+                    dateStarted = Date.distantPast
+                    dateCompleted = Date.distantPast
+                } else if newValue == .inProgress && oldValue == .completed {
+                    dateCompleted = Date.distantPast
+                } else if newValue == .inProgress && oldValue == .onShelf {
+                    dateStarted = Date.now
+                } else if newValue == .completed && oldValue == .onShelf {
+                    dateCompleted = Date.now
+                    dateStarted = dateAdded
+                } else {
+                    dateCompleted = Date.now
+                }
+            }
         }
     }
 }

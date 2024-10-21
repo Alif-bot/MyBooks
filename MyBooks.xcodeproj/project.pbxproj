@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C37DAE362CC4598F00D0B0A3 /* EditBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37DAE352CC4598F00D0B0A3 /* EditBookView.swift */; };
+		C3954AE22CC66DFF00FAB4D7 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3954AE12CC66DFF00FAB4D7 /* RatingView.swift */; };
 		C3E4B6372CB55F840063673D /* MyBooksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E4B6362CB55F840063673D /* MyBooksApp.swift */; };
 		C3E4B6392CB55F840063673D /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E4B6382CB55F840063673D /* BookListView.swift */; };
 		C3E4B63B2CB55F850063673D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3E4B63A2CB55F850063673D /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		C37DAE352CC4598F00D0B0A3 /* EditBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookView.swift; sourceTree = "<group>"; };
+		C3954AE12CC66DFF00FAB4D7 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		C3E4B6332CB55F840063673D /* MyBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3E4B6362CB55F840063673D /* MyBooksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBooksApp.swift; sourceTree = "<group>"; };
 		C3E4B6382CB55F840063673D /* BookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				C3E4B6482CB5B6700063673D /* NewBookView.swift */,
 				C37DAE352CC4598F00D0B0A3 /* EditBookView.swift */,
 				C3E4B6442CB560AE0063673D /* Book.swift */,
+				C3954AE12CC66DFF00FAB4D7 /* RatingView.swift */,
 				C3E4B63A2CB55F850063673D /* Assets.xcassets */,
 				C3E4B63C2CB55F850063673D /* Preview Content */,
 			);
@@ -149,6 +152,7 @@
 				C3E4B6492CB5B6700063673D /* NewBookView.swift in Sources */,
 				C37DAE362CC4598F00D0B0A3 /* EditBookView.swift in Sources */,
 				C3E4B6392CB55F840063673D /* BookListView.swift in Sources */,
+				C3954AE22CC66DFF00FAB4D7 /* RatingView.swift in Sources */,
 				C3E4B6372CB55F840063673D /* MyBooksApp.swift in Sources */,
 				C3E4B6452CB560AE0063673D /* Book.swift in Sources */,
 			);
