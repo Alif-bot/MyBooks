@@ -9,16 +9,16 @@ import SwiftUI
 
 struct RatingView: View {
     
-    @Binding var rating: Int
+    @Binding var rating: Int?
     var maximumRating = 5
-    var onColor = Color.yellow
+    var onColor = Color.red
     var ofColor = Color.gray
     
     var body: some View {
         HStack {
             ForEach(1 ..< maximumRating + 1, id: \.self) { number in
-                Image(systemName: "star.fill")
-                    .foregroundColor(number <= rating ? onColor : ofColor)
+                Image(systemName: "heart.fill")
+                    .foregroundColor(number <= rating ?? 0 ? onColor : ofColor)
                     .onTapGesture {
                         rating = number
                     }
