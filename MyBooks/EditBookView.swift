@@ -11,6 +11,8 @@ struct EditBookView: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    let book: Book
+    
     @State private var status = Status.onShelf
     @State private var rating: Int?
     @State private var title = ""
@@ -19,6 +21,8 @@ struct EditBookView: View {
     @State private var dateAdded = Date.distantPast
     @State private var dateStarted = Date.distantPast
     @State private var dateCompleted = Date.distantPast
+    @State private var firstView = true
+    
     var body: some View {
         HStack {
             Text("Status")
@@ -38,14 +42,14 @@ struct EditBookView: View {
                 }
                 if status == .inProgress || status == .completed {
                     LabeledContent{
-                        DatePicker("",selection: $dateStarted, displayedComponents: .date)
+                        DatePicker("",selection: $dateStarted, in: dateAdded..., displayedComponents: .date)
                     } label: {
                         Text("Date started")
                     }
                 }
                 if status == .completed {
                     LabeledContent{
-                        DatePicker("",selection: $dateCompleted, displayedComponents: .date)
+                        DatePicker("",selection: $dateCompleted, in: dateStarted..., displayedComponents: .date)
                     } label: {
                         Text("Date completed")
                     }
@@ -53,18 +57,21 @@ struct EditBookView: View {
             }
             .foregroundStyle(.secondary)
             .onChange(of: status) { oldValue, newValue in
-                if newValue == .onShelf {
-                    dateStarted = Date.distantPast
-                    dateCompleted = Date.distantPast
-                } else if newValue == .inProgress && oldValue == .completed {
-                    dateCompleted = Date.distantPast
-                } else if newValue == .inProgress && oldValue == .onShelf {
-                    dateStarted = Date.now
-                } else if newValue == .completed && oldValue == .onShelf {
-                    dateCompleted = Date.now
-                    dateStarted = dateAdded
-                } else {
-                    dateCompleted = Date.now
+                if !firstView {
+                    if newValue == .onShelf {
+                        dateStarted = Date.distantPast
+                        dateCompleted = Date.distantPast
+                    } else if newValue == .inProgress && oldValue == .completed {
+                        dateCompleted = Date.distantPast
+                    } else if newValue == .inProgress && oldValue == .onShelf {
+                        dateStarted = Date.now
+                    } else if newValue == .completed && oldValue == .onShelf {
+                        dateCompleted = Date.now
+                        dateStarted = dateAdded
+                    } else {
+                        dateCompleted = Date.now
+                    }
+                    firstView = false
                 }
             }
             Divider()
@@ -98,16 +105,54 @@ struct EditBookView: View {
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            Button("Update", action: {
-                dismiss()
-            })
-            .buttonStyle(.borderedProminent)
+            ToolbarItem(placement: .topBarTrailing) {
+                if changed {
+                    Button("Update", action: {
+                        book.status = status
+                        book.rating = rating
+                        book.title = title
+                        book.author = author
+                        book.dateAdded = dateAdded
+                        book.dateStarted = dateStarted
+                        book.dateCompleted = dateCompleted
+
+                        dismiss()
+                    })
+                    .buttonStyle(.borderedProminent)
+                }
+            }
+            ToolbarItem(placement: .topBarLeading) {
+                Button("Cancel", action: {
+                    dismiss()
+                })
+                .buttonStyle(.borderless)
+            }
         }
+        .onAppear {
+            status = book.status
+            rating = book.rating
+            title = book.title
+            author = book.author
+            summary = book.summery
+            dateAdded = book.dateAdded
+            dateStarted = book.dateStarted
+            dateCompleted = book.dateCompleted
+        }
+    }
+    var changed: Bool {
+        status != book.status
+        || rating != book.rating
+        || title != book.title
+        || author != book.author
+        || summary != book.summery
+        || dateAdded != book.dateAdded
+        || dateStarted != book.dateStarted
+        || dateCompleted != book.dateCompleted
     }
 }
 
-#Preview {
-    NavigationStack{
-        EditBookView()
-    }
-}
+//#Preview {
+//    NavigationStack{
+//        EditBookView()
+//    }
+//}
